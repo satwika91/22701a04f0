@@ -1,0 +1,62 @@
+public class Main {
+
+    static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+
+    public static ListNode removeElements(ListNode head, int val) {
+        ListNode ans = new ListNode(0, head);
+        ListNode dummy = ans;
+
+        while (dummy != null) {
+            while (dummy.next != null && dummy.next.val == val) {
+                dummy.next = dummy.next.next;
+            }
+            dummy = dummy.next;
+        }
+
+        return ans.next;
+    }
+
+    
+    public static void printList(ListNode head) {
+        while (head != null) {
+            System.out.print(head.val + " ");
+            head = head.next;
+        }
+        System.out.println();
+}
+    public static ListNode createList(int[] values) {
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+        for (int val : values) {
+            current.next = new ListNode(val);
+            current = current.next;
+        }
+        return dummy.next;
+    }
+
+    public static void main(String[] args) {
+        int[] values = {1, 2, 6, 3, 4, 5, 6};  // Sample input
+        int valToRemove = 6;
+       
+
+        ListNode head = createList(values);
+        System.out.print("Original list: ");
+        printList(head);
+
+        ListNode result = removeElements(head, valToRemove);
+        System.out.print("After removal: ");
+        printList(result);
+    }
+}
